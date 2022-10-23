@@ -1,13 +1,8 @@
 module.exports = {
-  content: ["./src/**/*.{js,jsx,ts,tsx}", "./public/**/*.html"],
-  darkMode: 'media',
-  theme: {
-    extend: {
-      scale: {
-        100: "1",
-        101: "1.01",
-      },
+    content: ["./src/**/*.{html,js,ts,jsx,tsx}"],
+    darkMode: "media",
+    theme: {
+        extend: {},
     },
-  },
-  plugins: [],
+    plugins: [],
 };

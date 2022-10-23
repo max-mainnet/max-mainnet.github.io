@@ -54,11 +54,12 @@ export const Content = () => {
         <SwapWidget
             onSwap={onSwap}
             onDisConnect={onDisConnect}
-            width={"400px"}
+            width={"500px"}
             connection={{
                 AccountId: accountId || "",
                 isSignedIn: !!accountId,
             }}
+            className="mx-auto"
             transactionState={{
                 state: swapState,
                 setState: setSwapState,

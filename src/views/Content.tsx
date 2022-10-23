@@ -7,7 +7,6 @@ import { Transaction } from "@ref_finance/ref-sdk";
 import { transformTransactions, WalletSelectorTransactions } from "@ref_finance/ref-sdk";
 import { NotLoginError } from "@ref_finance/ref-sdk";
 import { SignAndSendTransactionsParams } from "@near-wallet-selector/core/lib/wallet";
-import { Theme } from "@ref_finance/ref-sdk/src/SwapWidget/constant";
 
 export const Content = () => {
     const { modal, selector, accountId } = useWalletSelector();

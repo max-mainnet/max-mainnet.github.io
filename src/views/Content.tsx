@@ -1,11 +1,11 @@
 import * as React from "react";
-import { SwapWidget } from "@ref_finance/ref-sdk/dist";
+import { SwapWidget } from "@ref_finance/ref-sdk";
 import { useWalletSelector } from "./WalletSelectorContext";
 import "@near-wallet-selector/modal-ui/styles.css";
-import { Transaction } from "@ref_finance/ref-sdk/dist";
+import { Transaction } from "@ref_finance/ref-sdk";
 
-import { transformTransactions, WalletSelectorTransactions } from "@ref_finance/ref-sdk/dist";
-import { NotLoginError } from "@ref_finance/ref-sdk/dist";
+import { transformTransactions, WalletSelectorTransactions } from "@ref_finance/ref-sdk";
+import { NotLoginError } from "@ref_finance/ref-sdk";
 import { SignAndSendTransactionsParams } from "@near-wallet-selector/core/lib/wallet";
 
 export const Content = () => {

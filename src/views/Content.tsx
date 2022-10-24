@@ -7,8 +7,8 @@ import { Transaction } from "@ref_finance/ref-sdk";
 import { transformTransactions, WalletSelectorTransactions } from "@ref_finance/ref-sdk";
 import { NotLoginError } from "@ref_finance/ref-sdk";
 
-import { getTokenList } from "@ref_finance/ref-sdk";
 import { SignAndSendTransactionsParams } from "@near-wallet-selector/core/lib/wallet";
+import { getDefaultTokenList } from "@ref_finance/ref-sdk";
 
 export const Content = () => {
     const { modal, selector, accountId } = useWalletSelector();
@@ -52,9 +52,9 @@ export const Content = () => {
         return wallet.signAndSendTransactions(WalletSelectorTransactions);
     };
 
-    const list = getTokenList();
+    const defaultList = getDefaultTokenList();
 
-    list.pop();
+    defaultList.pop();
 
     return (
         <SwapWidget
@@ -72,7 +72,7 @@ export const Content = () => {
                 tx,
                 detail: "(success details show here)",
             }}
-            list={list}
+            defaultTokenList={defaultList}
             enableSmartRouting={true}
             onConnect={onConnect}
         />

@@ -1,5 +1,5 @@
 import { map, distinctUntilChanged } from "rxjs";
-import { setupWalletSelector } from "@near-wallet-selector/core";
+import { NetworkId, setupWalletSelector } from "@near-wallet-selector/core";
 import type { WalletSelector, AccountState } from "@near-wallet-selector/core";
 import { setupModal } from "@near-wallet-selector/modal-ui";
 import type { WalletSelectorModal } from "@near-wallet-selector/modal-ui";
@@ -9,7 +9,8 @@ import * as React from "react";
 
 import { useEffect, useState, useContext, createContext, useCallback } from "react";
 
-import { REF_FI_CONTRACT_ID } from "@ref_finance/ref-sdk/dist";
+import { REF_FI_CONTRACT_ID } from "@ref_finance/ref-sdk";
+import { getConfig } from "@ref_finance/ref-sdk";
 
 const CONTRACT_ID = REF_FI_CONTRACT_ID;
 
@@ -36,7 +37,7 @@ export const WalletSelectorContextProvider: React.FC<{}> = ({ children }) => {
 
     const init = useCallback(async () => {
         const _selector = await setupWalletSelector({
-            network: "testnet",
+            network: getConfig().networkId as NetworkId,
             debug: true,
             modules: [setupNearWallet()],
         });

@@ -1,14 +1,9 @@
 import * as React from "react";
-import { SwapWidget } from "@ref_finance/ref-sdk";
+import { SwapWidget, Transaction, transformTransactions, getDefaultTokenList, NotLoginError, TokenMetadata } from "@ref_finance/ref-sdk/";
 import { useWalletSelector } from "./WalletSelectorContext";
 import "@near-wallet-selector/modal-ui/styles.css";
-import { Transaction } from "@ref_finance/ref-sdk";
-
-import { transformTransactions, WalletSelectorTransactions } from "@ref_finance/ref-sdk";
-import { NotLoginError } from "@ref_finance/ref-sdk";
 
 import { SignAndSendTransactionsParams } from "@near-wallet-selector/core/lib/wallet";
-import { getDefaultTokenList } from "@ref_finance/ref-sdk";
 
 export const Content = () => {
     const { modal, selector, accountId } = useWalletSelector();
@@ -72,7 +67,7 @@ export const Content = () => {
                 tx,
                 detail: "(success details show here)",
             }}
-            defaultTokenList={defaultList}
+            defaultTokenList={defaultList as TokenMetadata[]}
             enableSmartRouting={true}
             onConnect={onConnect}
         />

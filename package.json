@@ -5,7 +5,9 @@
   "description": "Trying-out Tailwind CSS with Parcel",
   "scripts": {
     "start": " parcel serve src/index.html ",
+    "start:mainnet": "NEAR_ENV=mainnet parcel serve src/index.html ",
     "build": "rm -rf dist && rm -rf .parcel-cache && parcel build --dist-dir ./dist src/index.html ",
+    "build:mainnet": "rm -rf dist && rm -rf .parcel-cache && NEAR_ENV=mainnet parcel build --dist-dir ./dist src/index.html ",
     "clean": "rm -rf .parcel-cache dist"
   },
   "devDependencies": {

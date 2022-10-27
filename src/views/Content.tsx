@@ -69,7 +69,7 @@ export const Content = () => {
                 detail: "(success details show here)",
             }}
             defaultTokenList={defaultList as TokenMetadata[]}
-            enableSmartRouting={true}
+            enableSmartRouting={false}
             onConnect={onConnect}
         />
     );

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { SwapWidget, Transaction, transformTransactions, getDefaultTokenList, NotLoginError, TokenMetadata, getPool } from "@ref_finance/ref-sdk/";
+import { SwapWidget, Transaction, transformTransactions, getDefaultTokenList, NotLoginError, TokenMetadata, getPool } from "@ref_finance/ref-sdk";
 import { useWalletSelector } from "./WalletSelectorContext";
 import "@near-wallet-selector/modal-ui/styles.css";
 

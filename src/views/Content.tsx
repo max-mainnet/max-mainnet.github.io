@@ -50,8 +50,6 @@ export const Content = () => {
 
   const defaultList = getDefaultTokenList();
 
-  console.log(defaultList);
-
   //   defaultList.pop();
 
   return (

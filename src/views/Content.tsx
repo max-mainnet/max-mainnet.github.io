@@ -1,12 +1,31 @@
 import * as React from "react";
-import { SwapWidget, Transaction, transformTransactions, getDefaultTokenList, NotLoginError, TokenMetadata, getPool } from "@ref_finance/ref-sdk";
+import {
+  SwapWidget,
+  config,
+  Transaction,
+  transformTransactions,
+  getDefaultTokenList,
+  NotLoginError,
+  TokenMetadata,
+  getPool,
+  init_env,
+  getConfig,
+} from "@ref-finance/ref-sdk";
 import { useWalletSelector } from "./WalletSelectorContext";
 import "@near-wallet-selector/modal-ui/styles.css";
 
 import { SignAndSendTransactionsParams } from "@near-wallet-selector/core/lib/wallet";
 import { useEffect } from "react";
 
+const REF_WIDGET_NETWORK_ENV_KEY = "REF_WIDGET_NETWORK_ENV_VALUE";
+
 export const Content = () => {
+  const STORED_NETWORK = localStorage.getItem(REF_WIDGET_NETWORK_ENV_KEY);
+
+  STORED_NETWORK && init_env(STORED_NETWORK);
+
+  const [enableSmartRouting, setEnableSmartRouting] = React.useState(false);
+
   const { modal, selector, accountId } = useWalletSelector();
 
   const onDisConnect = async () => {
@@ -50,27 +69,49 @@ export const Content = () => {
 
   const defaultList = getDefaultTokenList();
 
-  //   defaultList.pop();
-
   return (
-    <SwapWidget
-      onSwap={onSwap}
-      onDisConnect={onDisConnect}
-      width={"500px"}
-      connection={{
-        AccountId: accountId || "",
-        isSignedIn: !!accountId,
-      }}
-      className="mx-auto"
-      transactionState={{
-        state: swapState,
-        setState: setSwapState,
-        tx,
-        detail: "(success details show here)",
-      }}
-      defaultTokenList={defaultList as TokenMetadata[]}
-      enableSmartRouting={true}
-      onConnect={onConnect}
-    />
+    <>
+      <button
+        className="text-white outline ml-2 mt-2"
+        onClick={() => {
+          localStorage.setItem(REF_WIDGET_NETWORK_ENV_KEY, getConfig().networkId === "testnet" ? "mainnet" : "testnet");
+
+          window.location.reload();
+        }}
+      >
+        Change Network from
+        {` ${getConfig().networkId} to ${getConfig().networkId === "testnet" ? "mainnet" : "testnet"}`}
+      </button>
+
+      <button
+        className="text-white outline ml-2 mt-2"
+        onClick={() => {
+          setEnableSmartRouting(!enableSmartRouting);
+        }}
+      >
+        Change support ledger from
+        {` ${enableSmartRouting} to ${!enableSmartRouting}`}
+      </button>
+
+      <SwapWidget
+        onSwap={onSwap}
+        onDisConnect={onDisConnect}
+        width={"500px"}
+        connection={{
+          AccountId: accountId || "",
+          isSignedIn: !!accountId,
+        }}
+        className="mx-auto"
+        transactionState={{
+          state: swapState,
+          setState: setSwapState,
+          tx,
+          detail: "(success details show here)",
+        }}
+        defaultTokenList={defaultList as TokenMetadata[]}
+        enableSmartRouting={enableSmartRouting}
+        onConnect={onConnect}
+      />
+    </>
   );
 };

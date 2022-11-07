@@ -9,101 +9,104 @@ import * as React from "react";
 
 import { useEffect, useState, useContext, createContext, useCallback } from "react";
 
-import { REF_FI_CONTRACT_ID } from "@ref_finance/ref-sdk";
-import { getConfig } from "@ref_finance/ref-sdk";
+import { REF_FI_CONTRACT_ID } from "@ref-finance/ref-sdk";
+import { getConfig } from "@ref-finance/ref-sdk";
 
 const CONTRACT_ID = REF_FI_CONTRACT_ID;
 
 declare global {
-    interface Window {
-        selector: WalletSelector;
-        modal: WalletSelectorModal;
-    }
+  interface Window {
+    selector: WalletSelector;
+    modal: WalletSelectorModal;
+  }
 }
 
 interface WalletSelectorContextValue {
-    selector: WalletSelector;
-    modal: WalletSelectorModal;
-    accounts: Array<AccountState>;
-    accountId: string | null;
+  selector: WalletSelector;
+  modal: WalletSelectorModal;
+  accounts: Array<AccountState>;
+  accountId: string | null;
 }
 
 const WalletSelectorContext = React.createContext<WalletSelectorContextValue | null>(null);
 
 export const WalletSelectorContextProvider: React.FC<{}> = ({ children }) => {
-    const [selector, setSelector] = useState<WalletSelector | null>(null);
-    const [modal, setModal] = useState<WalletSelectorModal | null>(null);
-    const [accounts, setAccounts] = useState<Array<AccountState>>([]);
+  const [selector, setSelector] = useState<WalletSelector | null>(null);
+  const [modal, setModal] = useState<WalletSelectorModal | null>(null);
+  const [accounts, setAccounts] = useState<Array<AccountState>>([]);
 
-    const init = useCallback(async () => {
-        const _selector = await setupWalletSelector({
-            network: getConfig().networkId as NetworkId,
-            debug: true,
-            modules: [setupNearWallet()],
-        });
-        const _modal = setupModal(_selector, { contractId: CONTRACT_ID });
-        const state = _selector.store.getState();
-        setAccounts(state.accounts);
+  const init = useCallback(async () => {
+    const _selector = await setupWalletSelector({
+      network: getConfig().networkId as NetworkId,
+      debug: true,
+      modules: [setupNearWallet()],
+    });
 
-        window.selector = _selector;
-        window.modal = _modal;
+    console.log({ CONTRACT_ID, config: getConfig() });
 
-        setSelector(_selector);
-        setModal(_modal);
-    }, []);
+    const _modal = setupModal(_selector, { contractId: CONTRACT_ID });
+    const state = _selector.store.getState();
+    setAccounts(state.accounts);
 
-    useEffect(() => {
-        init().catch((err) => {
-            console.error(err);
-            alert("Failed to initialise wallet selector");
-        });
-    }, [init]);
+    window.selector = _selector;
+    window.modal = _modal;
 
-    useEffect(() => {
-        if (!selector) {
-            return;
-        }
+    setSelector(_selector);
+    setModal(_modal);
+  }, []);
 
-        const subscription = selector.store.observable
-            .pipe(
-                map((state) => state.accounts),
-                distinctUntilChanged()
-            )
-            .subscribe((nextAccounts) => {
-                console.log("Accounts Update", nextAccounts);
+  useEffect(() => {
+    init().catch((err) => {
+      console.error(err);
+      alert("Failed to initialise wallet selector");
+    });
+  }, [init]);
 
-                setAccounts(nextAccounts);
-            });
-
-        return () => subscription.unsubscribe();
-    }, [selector]);
-
-    if (!selector || !modal) {
-        return null;
+  useEffect(() => {
+    if (!selector) {
+      return;
     }
 
-    const accountId = accounts.find((account) => account.active)?.accountId || null;
+    const subscription = selector.store.observable
+      .pipe(
+        map((state) => state.accounts),
+        distinctUntilChanged()
+      )
+      .subscribe((nextAccounts) => {
+        console.log("Accounts Update", nextAccounts);
 
-    return (
-        <WalletSelectorContext.Provider
-            value={{
-                selector,
-                modal,
-                accounts,
-                accountId,
-            }}
-        >
-            {children}
-        </WalletSelectorContext.Provider>
-    );
+        setAccounts(nextAccounts);
+      });
+
+    return () => subscription.unsubscribe();
+  }, [selector]);
+
+  if (!selector || !modal) {
+    return null;
+  }
+
+  const accountId = accounts.find((account) => account.active)?.accountId || null;
+
+  return (
+    <WalletSelectorContext.Provider
+      value={{
+        selector,
+        modal,
+        accounts,
+        accountId,
+      }}
+    >
+      {children}
+    </WalletSelectorContext.Provider>
+  );
 };
 
 export function useWalletSelector() {
-    const context = React.useContext(WalletSelectorContext);
+  const context = React.useContext(WalletSelectorContext);
 
-    if (!context) {
-        throw new Error("useWalletSelector must be used within a WalletSelectorContextProvider");
-    }
+  if (!context) {
+    throw new Error("useWalletSelector must be used within a WalletSelectorContextProvider");
+  }
 
-    return context;
+  return context;
 }

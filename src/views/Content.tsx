@@ -8,7 +8,7 @@ import {
   NotLoginError,
   TokenMetadata,
   getPool,
-  // init_env,
+  init_env,
   getConfig,
 } from "@ref-finance/ref-sdk";
 import { useWalletSelector } from "./WalletSelectorContext";
@@ -16,14 +16,9 @@ import "@near-wallet-selector/modal-ui/styles.css";
 
 import { SignAndSendTransactionsParams } from "@near-wallet-selector/core/lib/wallet";
 import { useEffect } from "react";
-
-const REF_WIDGET_NETWORK_ENV_KEY = "REF_WIDGET_NETWORK_ENV_VALUE";
+import { REF_WIDGET_NETWORK_ENV_KEY } from "./App";
 
 export const Content = () => {
-  const STORED_NETWORK = localStorage.getItem(REF_WIDGET_NETWORK_ENV_KEY);
-
-  // STORED_NETWORK && init_env(STORED_NETWORK);
-
   const [enableSmartRouting, setEnableSmartRouting] = React.useState(false);
 
   const { modal, selector, accountId } = useWalletSelector();
@@ -71,7 +66,7 @@ export const Content = () => {
 
   return (
     <>
-      {/* <button
+      <button
         className="text-white outline ml-2 mt-2"
         onClick={() => {
           localStorage.setItem(REF_WIDGET_NETWORK_ENV_KEY, getConfig().networkId === "testnet" ? "mainnet" : "testnet");
@@ -81,7 +76,7 @@ export const Content = () => {
       >
         Change Network from
         {` ${getConfig().networkId} to ${getConfig().networkId === "testnet" ? "mainnet" : "testnet"}`}
-      </button> */}
+      </button>
 
       <button
         className="text-white outline ml-2 mt-2"

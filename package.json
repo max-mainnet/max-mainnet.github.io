@@ -47,7 +47,7 @@
     "tailwindcss": "^3.2.1"
   },
   "alias": {
-    "react": "./node_modules/@ref_finance/ref-sdk/node_modules/react",
-    "react-dom": "./node_modules/@ref_finance/ref-sdk/node_modules/react-dom"
+    "react": "./node_modules/@ref-finance/ref-sdk/node_modules/react",
+    "react-dom": "./node_modules/@ref-finance/ref-sdk/node_modules/react-dom"
   }
 }

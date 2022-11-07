@@ -68,8 +68,10 @@ export const Content = () => {
     <>
       <button
         className="text-white outline ml-2 mt-2"
-        onClick={() => {
+        onClick={async () => {
           localStorage.setItem(REF_WIDGET_NETWORK_ENV_KEY, getConfig().networkId === "testnet" ? "mainnet" : "testnet");
+
+          await onDisConnect();
 
           window.location.reload();
         }}

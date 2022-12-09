@@ -11,9 +11,7 @@ import { useEffect, useState, useContext, createContext, useCallback } from "rea
 
 import { getConfig, init_env, REF_FI_CONTRACT_ID } from "@ref-finance/ref-sdk";
 
-
-
-const STORED_NETWORK = localStorage.getItem('REF_WIDGET_NETWORK_ENV_VALUE');
+const STORED_NETWORK = localStorage.getItem("REF_WIDGET_NETWORK_ENV_VALUE");
 STORED_NETWORK && init_env(STORED_NETWORK);
 
 const CONTRACT_ID = REF_FI_CONTRACT_ID;

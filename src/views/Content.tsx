@@ -10,6 +10,8 @@ import {
   getPool,
   init_env,
   getConfig,
+  ftGetTokensMetadata,
+  getPoolByIds,
 } from "@ref-finance/ref-sdk";
 import { useWalletSelector } from "./WalletSelectorContext";
 import "@near-wallet-selector/modal-ui/styles.css";
@@ -48,6 +50,10 @@ export const Content = () => {
     setSwapState(!!errorCode ? "fail" : !!lastTX ? "success" : null);
 
     window.history.replaceState({}, "", window.location.origin + window.location.pathname);
+
+    ftGetTokensMetadata().then((res) => {
+      console.log(res);
+    });
   }, []);
 
   const onSwap = async (transactionsRef: Transaction[]) => {

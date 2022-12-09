@@ -26,6 +26,9 @@ export const Content = () => {
   const { modal, selector, accountId } = useWalletSelector();
 
   const onDisConnect = async () => {
+    if(!accountId) return; 
+
+
     const wallet = await selector.wallet();
     return await wallet.signOut();
   };
@@ -76,7 +79,7 @@ export const Content = () => {
         className="text-white outline ml-2 mt-2"
         onClick={async () => {
           localStorage.setItem(REF_WIDGET_NETWORK_ENV_KEY, getConfig().networkId === "testnet" ? "mainnet" : "testnet");
-
+          
           await onDisConnect();
 
           window.location.reload();

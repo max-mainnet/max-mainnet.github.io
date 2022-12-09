@@ -92,7 +92,7 @@ export const Content = () => {
           setEnableSmartRouting(!enableSmartRouting);
         }}
       >
-        Change support ledger from
+        enable smart routing from
         {` ${enableSmartRouting} to ${!enableSmartRouting}`}
       </button>
 

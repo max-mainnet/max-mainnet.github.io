@@ -10,8 +10,6 @@ import {
   getPool,
   init_env,
   getConfig,
-  ftGetTokensMetadata,
-  getPoolByIds,
 } from "@ref-finance/ref-sdk";
 import { useWalletSelector } from "./WalletSelectorContext";
 import "@near-wallet-selector/modal-ui/styles.css";
@@ -26,9 +24,6 @@ export const Content = () => {
   const { modal, selector, accountId } = useWalletSelector();
 
   const onDisConnect = async () => {
-    if(!accountId) return; 
-
-
     const wallet = await selector.wallet();
     return await wallet.signOut();
   };
@@ -53,10 +48,6 @@ export const Content = () => {
     setSwapState(!!errorCode ? "fail" : !!lastTX ? "success" : null);
 
     window.history.replaceState({}, "", window.location.origin + window.location.pathname);
-
-    ftGetTokensMetadata().then((res) => {
-      console.log(res);
-    });
   }, []);
 
   const onSwap = async (transactionsRef: Transaction[]) => {
@@ -79,8 +70,8 @@ export const Content = () => {
         className="text-white outline ml-2 mt-2"
         onClick={async () => {
           localStorage.setItem(REF_WIDGET_NETWORK_ENV_KEY, getConfig().networkId === "testnet" ? "mainnet" : "testnet");
-          
-          await onDisConnect();
+
+          // await onDisConnect();
 
           window.location.reload();
         }}
@@ -95,7 +86,7 @@ export const Content = () => {
           setEnableSmartRouting(!enableSmartRouting);
         }}
       >
-        enable smart routing from
+        Change support ledger from
         {` ${enableSmartRouting} to ${!enableSmartRouting}`}
       </button>
 

@@ -110,6 +110,16 @@ export const Content = () => {
         {referralId ? `clear referral id` : `set referral id to ref-fee.testnet`}
       </button>
 
+      <button
+        className="text-white outline ml-2 mt-2"
+        onClick={() => {
+          // setEnableSmartRouting(!enableSmartRouting);
+          setReferralId("amyliang.testnet");
+        }}
+      >
+        set referral id to amyliang.testnet
+      </button>
+
       <SwapWidget
         onSwap={onSwap}
         onDisConnect={onDisConnect}

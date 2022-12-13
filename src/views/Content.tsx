@@ -26,8 +26,7 @@ export const Content = () => {
   const { modal, selector, accountId } = useWalletSelector();
 
   const onDisConnect = async () => {
-    if(!accountId) return; 
-
+    if (!accountId) return;
 
     const wallet = await selector.wallet();
     return await wallet.signOut();
@@ -40,6 +39,8 @@ export const Content = () => {
   const [swapState, setSwapState] = React.useState<"success" | "fail" | null>(null);
 
   const [tx, setTx] = React.useState<string | undefined>(undefined);
+
+  const [referralId, setReferralId] = React.useState<string>("ref-fee.testnet");
 
   React.useEffect(() => {
     const errorCode = new URLSearchParams(window.location.search).get("errorCode");
@@ -79,7 +80,7 @@ export const Content = () => {
         className="text-white outline ml-2 mt-2"
         onClick={async () => {
           localStorage.setItem(REF_WIDGET_NETWORK_ENV_KEY, getConfig().networkId === "testnet" ? "mainnet" : "testnet");
-          
+
           await onDisConnect();
 
           window.location.reload();
@@ -97,6 +98,16 @@ export const Content = () => {
       >
         enable smart routing from
         {` ${enableSmartRouting} to ${!enableSmartRouting}`}
+      </button>
+
+      <button
+        className="text-white outline ml-2 mt-2"
+        onClick={() => {
+          // setEnableSmartRouting(!enableSmartRouting);
+          setReferralId(!referralId ? "ref-fee.testnet" : "");
+        }}
+      >
+        {referralId ? `clear referral id` : `set referral id to ref-fee.testnet`}
       </button>
 
       <SwapWidget
@@ -117,6 +128,7 @@ export const Content = () => {
         defaultTokenList={defaultList as TokenMetadata[]}
         enableSmartRouting={enableSmartRouting}
         onConnect={onConnect}
+        referralId={referralId}
       />
     </>
   );

@@ -81,6 +81,9 @@ typings/
 # nuxt.js build output
 .nuxt
 
+
+/dist
+
 # react / gatsby
 public/
 

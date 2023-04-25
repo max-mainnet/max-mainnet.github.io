@@ -29,7 +29,7 @@
     "@near-wallet-selector/modal-ui": "^7.0.0",
     "@near-wallet-selector/near-wallet": "^7.0.0",
     "@react-icons/all-files": "^4.1.0",
-    "@ref_finance/ref-sdk": "^1.0.2",
+    "@ref-finance/ref-sdk": "^1.2.0",
     "@types/big.js": "^6.1.5",
     "@types/bn.js": "^5.1.1",
     "@types/lodash": "^4.14.182",

@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 import {
   SwapWidget,
   config,
@@ -12,16 +12,17 @@ import {
   getConfig,
   ftGetTokensMetadata,
   getPoolByIds,
-} from "@ref-finance/ref-sdk";
-import { useWalletSelector } from "./WalletSelectorContext";
-import "@near-wallet-selector/modal-ui/styles.css";
+} from '@ref-finance/ref-sdk';
+import { useWalletSelector } from './WalletSelectorContext';
+import '@near-wallet-selector/modal-ui/styles.css';
 
-import { SignAndSendTransactionsParams } from "@near-wallet-selector/core/lib/wallet";
-import { useEffect } from "react";
-import { REF_WIDGET_NETWORK_ENV_KEY } from "./App";
+import { SignAndSendTransactionsParams } from '@near-wallet-selector/core/lib/wallet';
+import { useEffect } from 'react';
+import { REF_WIDGET_NETWORK_ENV_KEY } from './App';
 
 export const Content = () => {
   const [enableSmartRouting, setEnableSmartRouting] = React.useState(false);
+  console.log('enableSmartRouting: ', enableSmartRouting);
 
   const { modal, selector, accountId } = useWalletSelector();
 
@@ -36,24 +37,24 @@ export const Content = () => {
     modal.show();
   };
 
-  const [swapState, setSwapState] = React.useState<"success" | "fail" | null>(null);
+  const [swapState, setSwapState] = React.useState<'success' | 'fail' | null>(null);
 
   const [tx, setTx] = React.useState<string | undefined>(undefined);
 
-  const [referralId, setReferralId] = React.useState<string>("ref-fee.testnet");
+  const [referralId, setReferralId] = React.useState<string>('ref-fee.testnet');
 
   React.useEffect(() => {
-    const errorCode = new URLSearchParams(window.location.search).get("errorCode");
+    const errorCode = new URLSearchParams(window.location.search).get('errorCode');
 
-    const transactions = new URLSearchParams(window.location.search).get("transactionHashes");
+    const transactions = new URLSearchParams(window.location.search).get('transactionHashes');
 
-    const lastTX = transactions?.split(",").pop();
+    const lastTX = transactions?.split(',').pop();
 
     setTx(lastTX);
 
-    setSwapState(!!errorCode ? "fail" : !!lastTX ? "success" : null);
+    setSwapState(!!errorCode ? 'fail' : !!lastTX ? 'success' : null);
 
-    window.history.replaceState({}, "", window.location.origin + window.location.pathname);
+    window.history.replaceState({}, '', window.location.origin + window.location.pathname);
 
     ftGetTokensMetadata().then((res) => {
       console.log(res);
@@ -77,9 +78,9 @@ export const Content = () => {
   return (
     <>
       <button
-        className="text-white outline ml-2 mt-2"
+        className='text-white outline ml-2 mt-2'
         onClick={async () => {
-          localStorage.setItem(REF_WIDGET_NETWORK_ENV_KEY, getConfig().networkId === "testnet" ? "mainnet" : "testnet");
+          localStorage.setItem(REF_WIDGET_NETWORK_ENV_KEY, getConfig().networkId === 'testnet' ? 'mainnet' : 'testnet');
 
           await onDisConnect();
 
@@ -87,11 +88,11 @@ export const Content = () => {
         }}
       >
         Change Network from
-        {` ${getConfig().networkId} to ${getConfig().networkId === "testnet" ? "mainnet" : "testnet"}`}
+        {` ${getConfig().networkId} to ${getConfig().networkId === 'testnet' ? 'mainnet' : 'testnet'}`}
       </button>
 
       <button
-        className="text-white outline ml-2 mt-2"
+        className='text-white outline ml-2 mt-2'
         onClick={() => {
           setEnableSmartRouting(!enableSmartRouting);
         }}
@@ -101,20 +102,20 @@ export const Content = () => {
       </button>
 
       <button
-        className="text-white outline ml-2 mt-2"
+        className='text-white outline ml-2 mt-2'
         onClick={() => {
           // setEnableSmartRouting(!enableSmartRouting);
-          setReferralId(!referralId ? "ref-fee.testnet" : "");
+          setReferralId(!referralId ? 'ref-fee.testnet' : '');
         }}
       >
         {referralId ? `clear referral id` : `set referral id to ref-fee.testnet`}
       </button>
 
       <button
-        className="text-white outline ml-2 mt-2"
+        className='text-white outline ml-2 mt-2'
         onClick={() => {
           // setEnableSmartRouting(!enableSmartRouting);
-          setReferralId("amyliang.testnet");
+          setReferralId('amyliang.testnet');
         }}
       >
         set referral id to amyliang.testnet
@@ -123,17 +124,17 @@ export const Content = () => {
       <SwapWidget
         onSwap={onSwap}
         onDisConnect={onDisConnect}
-        width={"500px"}
+        width={'500px'}
         connection={{
-          AccountId: accountId || "",
+          AccountId: accountId || '',
           isSignedIn: !!accountId,
         }}
-        className="mx-auto"
+        className='mx-auto'
         transactionState={{
           state: swapState,
           setState: setSwapState,
           tx,
-          detail: "(success details show here)",
+          detail: '(success details show here)',
         }}
         defaultTokenList={defaultList as TokenMetadata[]}
         enableSmartRouting={enableSmartRouting}

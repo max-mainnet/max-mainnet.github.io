@@ -158,6 +158,16 @@
   dependencies:
     rxjs "^7.5.5"
 
+"@near-wallet-selector/core@8.9.1":
+  version "8.9.1"
+  resolved "https://registry.yarnpkg.com/@near-wallet-selector/core/-/core-8.9.1.tgz#7d4de41ff18cde6530d0153e8335d5e366c07452"
+  integrity sha512-EY8PmKyNoW/pWsZFZM9V2sluSMn1DPQ8PDj+veiOCbuMP2USJ5j9qxJd1iJy07JbmI/40EuCA6IAZ6SbukzaUQ==
+  dependencies:
+    borsh "0.7.0"
+    events "3.3.0"
+    js-sha256 "0.9.0"
+    rxjs "7.8.1"
+
 "@near-wallet-selector/modal-ui@^7.0.0":
   version "7.1.0"
   resolved "https://registry.yarnpkg.com/@near-wallet-selector/modal-ui/-/modal-ui-7.1.0.tgz#696dcd1f32cef32d1499a6ab7eb5e31f8d3f579f"
@@ -177,6 +187,14 @@
     "@near-wallet-selector/core" "7.1.0"
     "@near-wallet-selector/wallet-utils" "7.1.0"
 
+"@near-wallet-selector/my-near-wallet@8.9.1":
+  version "8.9.1"
+  resolved "https://registry.yarnpkg.com/@near-wallet-selector/my-near-wallet/-/my-near-wallet-8.9.1.tgz#fb65bb40444f5a7ee795516ecfc70446ff5e6c9f"
+  integrity sha512-gxnkCqdnG2j4X+5e0AJH6wwLOHbLmIidlYz+XMHXvuXw7CWHpYjtl1Xzlcm2B06Rv6F0veeEFBYWMYzltbqyqA==
+  dependencies:
+    "@near-wallet-selector/core" "8.9.1"
+    "@near-wallet-selector/wallet-utils" "8.9.1"
+
 "@near-wallet-selector/near-wallet@^7.0.0":
   version "7.1.0"
   resolved "https://registry.yarnpkg.com/@near-wallet-selector/near-wallet/-/near-wallet-7.1.0.tgz#2689313342b302f2834552d35d99eb0c637aea5e"
@@ -192,6 +210,14 @@
   dependencies:
     "@near-wallet-selector/core" "7.1.0"
     bn.js "^5.2.0"
+
+"@near-wallet-selector/wallet-utils@8.9.1":
+  version "8.9.1"
+  resolved "https://registry.yarnpkg.com/@near-wallet-selector/wallet-utils/-/wallet-utils-8.9.1.tgz#69087d180a85b7fcd5325970f456946aee4776cb"
+  integrity sha512-T7KXOLfeFXc+LL3hMvmqBEVB4LhlQD4l8VSNM+AuaZIBAg16gPbT1Q1580oH6kH3SILogvIjIDetLIVtdhGi7w==
+  dependencies:
+    "@near-wallet-selector/core" "8.9.1"
+    bn.js "5.2.1"
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
@@ -785,15 +811,19 @@
   resolved "https://registry.yarnpkg.com/@react-icons/all-files/-/all-files-4.1.0.tgz#477284873a0821928224b6fc84c62d2534d6650b"
   integrity sha512-hxBI2UOuVaI3O/BhQfhtb4kcGn9ft12RWAFVMUeNjqqhLsHvFtzIkFaptBJpFDANTKoDfdVoHTKZDlwKCACbMQ==
 
-"@ref_finance/ref-sdk@^1.0.2":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@ref_finance/ref-sdk/-/ref-sdk-1.0.3.tgz#1b0b688f5a5ea68913abb1c987a47ad82ef92050"
-  integrity sha512-2J30s4UCXa9nuXDgWA9QDIUy3fEBZcnUR0esyZ+MlMxzSb3KnItjfuhAkoeeRw9nzpyKg+4KNv+oymuBDLYoDA==
+"@ref-finance/ref-sdk@1.3.2":
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/@ref-finance/ref-sdk/-/ref-sdk-1.3.2.tgz#56dee753472a014baeaa9f6d1208e1c0d8e04078"
+  integrity sha512-j7p/fa6q+nZLc4pykaL1I4JKU+CybIPc7AqhmSCB83eugj8VoYJUg27L7g3lYLtk+dmyiLKsNazQ3s8blo/OhA==
   dependencies:
+    "@near-wallet-selector/core" "^7.0.0"
+    "@react-icons/all-files" "^4.1.0"
     "@types/big.js" "^6.1.5"
     "@types/bn.js" "^5.1.1"
     "@types/lodash" "^4.14.182"
     big.js "^6.2.1"
+    bn.js "^5.2.0"
+    lodash "^4.17.21"
     lodash-es "^4.17.21"
     mathjs "^9.3.0"
     near-api-js "0.44.2"
@@ -976,7 +1006,7 @@ bn.js@5.2.0:
   resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-5.2.0.tgz#358860674396c6997771a9d051fcc1b57d4ae002"
   integrity sha512-D7iWRBvnZE8ecXiLj/9wbxH7Tk79fAh8IHaTNq1RWRixsS02W+5qS+iE9yq6RYl0asXx5tw0bLhmT5pIfbSquw==
 
-bn.js@^5.2.0:
+bn.js@5.2.1, bn.js@^5.2.0:
   version "5.2.1"
   resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-5.2.1.tgz#0bc527a6a0d18d0aa8d5b0538ce4a77dccfa7b70"
   integrity sha512-eXRvHzWyYPBuB4NBy0cmYQjGitUrtqwbvlzP3G6VFnNRbsZQIxQ10PbKKHt8gZ/HW/D/747aDl+QkDqg3KQLMQ==
@@ -985,6 +1015,15 @@ boolbase@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/boolbase/-/boolbase-1.0.0.tgz#68dff5fbe60c51eb37725ea9e3ed310dcc1e776e"
   integrity sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww==
+
+borsh@0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/borsh/-/borsh-0.7.0.tgz#6e9560d719d86d90dc589bca60ffc8a6c51fec2a"
+  integrity sha512-CLCsZGIBCFnPtkNnieW/a8wmreDmfUtjU2m9yHrzPXIlNbqVs0AQrSatSG6vdNYUqdc83tkQi2eHfF98ubzQLA==
+  dependencies:
+    bn.js "^5.2.0"
+    bs58 "^4.0.0"
+    text-encoding-utf-8 "^1.0.2"
 
 borsh@^0.6.0:
   version "0.6.0"
@@ -1361,6 +1400,11 @@ escape-string-regexp@^1.0.5:
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
   integrity sha512-vbRorB5FUQWvla16U8R/qgaFIya2qGzwDrNmCZuYKrbdSUMG6I1ZCGQRefkRVhuOkIGVne7BQ35DSfo1qvJqFg==
 
+events@3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/events/-/events-3.3.0.tgz#31a95ad0a924e2d2c419a813aeb2c4e878ea7400"
+  integrity sha512-mQw+2fkQbALzQ7V0MY0IqdnXNOeTtP4r0lN9z7AAawCXgqea7bDii20AYrIBrFd/Hx0M2Ocz6S111CaFkUcb0Q==
+
 fast-glob@^3.2.12:
   version "3.2.12"
   resolved "https://registry.yarnpkg.com/fast-glob/-/fast-glob-3.2.12.tgz#7f39ec99c2e6ab030337142da9e0c18f37afae80"
@@ -1556,7 +1600,7 @@ javascript-natural-sort@^0.7.1:
   resolved "https://registry.yarnpkg.com/javascript-natural-sort/-/javascript-natural-sort-0.7.1.tgz#f9e2303d4507f6d74355a73664d1440fb5a0ef59"
   integrity sha512-nO6jcEfZWQXDhOiBtG2KvKyEptz7RVbpGP4vTD2hLBdmNQSsCiicO2Ioinv6UI4y9ukqnBpy+XZ9H6uLNgJTlw==
 
-js-sha256@^0.9.0:
+js-sha256@0.9.0, js-sha256@^0.9.0:
   version "0.9.0"
   resolved "https://registry.yarnpkg.com/js-sha256/-/js-sha256-0.9.0.tgz#0b89ac166583e91ef9123644bd3c5334ce9d0966"
   integrity sha512-sga3MHh9sgQN2+pJ9VYZ+1LPwXOxuBJBA5nrR5/ofPfuiJBE2hnjsaN8se8JznOmGLN2p49Pe5U/ttafcs/apA==
@@ -2190,6 +2234,13 @@ run-parallel@^1.1.9:
   integrity sha512-5l4VyZR86LZ/lDxZTR6jqL8AFE2S0IFLMP26AbjsLVADxHdhB/c0GUsH+y39UfCi3dzz8OlQuPmnaJOMoDHQBA==
   dependencies:
     queue-microtask "^1.2.2"
+
+rxjs@7.8.1:
+  version "7.8.1"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-7.8.1.tgz#6f6f3d99ea8044291efd92e7c7fcf562c4057543"
+  integrity sha512-AA3TVj+0A2iuIoQkWEK/tqFjBq2j+6PO6Y0zJcvzLAFhEFIO3HL0vls9hWLncZbAAbK0mar7oZ4V079I/qPMxg==
+  dependencies:
+    tslib "^2.1.0"
 
 rxjs@^7.5.5:
   version "7.5.7"
